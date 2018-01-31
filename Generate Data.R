@@ -1,4 +1,3 @@
-library(gpuR)
 library(sRDA)
 
 # generate data with few highly correlated variahbles
