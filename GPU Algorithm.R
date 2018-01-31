@@ -1,3 +1,5 @@
+library(gpuR)
+
 Y.matgpu <- gpuMatrix(predicted)
   #scale (SD = 1) and center (mean = 0) Y
   Ycgpu <- scale(Y.matgpu)
@@ -13,7 +15,6 @@ X.matgpu <- gpuMatrix(predictor)
   #variable length of X and Y
   p <- ncol(Xcrgpu)
   q <- ncol(Ycgpu)
-
 
  CRTs          <- c()
   sum_abs_Betas <- c()
@@ -31,7 +32,6 @@ stime_gpu       <-    system.time({
 
 BETAgpu <- gpuMatrix(rep(1, q), nrow = q, ncol = 1)
 ALPHAgpu <- gpuMatrix( rep(1, p), nrow = p, ncol = 1)
-
 
   while(CRT > tolerance && WeContinnue && Nr_iterations < max_iterations) {
 
@@ -54,7 +54,6 @@ ALPHAgpu <- gpuMatrix( rep(1, p), nrow = p, ncol = 1)
 
     CRT = sum((ALPHAgpu - ALPHgpu_0)^2, (BETAgpu - BETAgpu_0)^2);
 
-
     ALPHAgpu=            ALPHgpu_0
     BETAgpu =            BETAgpu_0
 
@@ -75,10 +74,3 @@ ALPHAgpu <- gpuMatrix( rep(1, p), nrow = p, ncol = 1)
 }# End of main loop
 })[3]#end of measure time
 stime_gpu
-
-rm(list = ls())
-gc()
-
-#result <- rbind(stime_normal, ptime, ptime4, stime_gpu)
-#result
-
