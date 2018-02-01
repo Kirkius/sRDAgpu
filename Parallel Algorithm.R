@@ -27,7 +27,7 @@ X.mat <- as.matrix(predictor)
 #Start algorithm
 #****************
 
-ptime2 <- system.time({
+ptime <- system.time({
   BETA = matrix( rep(1, q), nrow = q, ncol = 1, byrow = TRUE)
   ALPHA = matrix( rep(1, p), nrow = p, ncol = 1, byrow = TRUE)
 r <- foreach(i=1) %dopar% {
